@@ -12,15 +12,22 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {},
     "useDefineForClassFields": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/app/*": ["src/app/*"],
+      "@/env/*": ["src/environments/*"],
+      "@/core/*": ["src/app/core/*"],
+      "@/shared/*": ["src/app/shared/*"],
+      "@/features/*": ["src/app/features/*"],
+      "@/assets/*": ["src/assets/*"]
+    }
   },
   "files": [],
   "include": [],
