@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@use 'typography' as typography;
+@use 'color-palettes' as palettes;
+
+@include mat.core();
+
+$primary: mat.define-palette(palettes.$brown-palette, 500);
+$accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$red-palette, A100, A200);
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: typography.$typography-config,
+  )
+);
+
+@include mat.all-component-themes($theme);
+@include mat.typography-hierarchy(typography.$typography-config);

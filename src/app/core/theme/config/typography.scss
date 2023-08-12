@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+$typography-config: mat.define-typography-config(
+  $font-family: 'Nunito Sans, sans-serif',
+  // oneoffs
+  $headline-1:
+    mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2:
+    mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  // h1
+  $headline-5: mat.define-typography-level(36px, 36px, 600),
+);
