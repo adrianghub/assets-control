@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @use 'typography' as typography;
-@use 'color-palettes' as palettes;
+@use '_color-palettes' as palettes;
 
 @include mat.core();
 

@@ -13,7 +13,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'users',
     pathMatch: 'full',
   },
 ];

@@ -1,0 +1,30 @@
+<h1>Users</h1>
+
+<app-table
+  #table
+  [data$]="usersService.getUsers()"
+  [rowHover]="true"
+  (rowSelected)="goToDetails($event, 'users')"
+>
+  <app-table-columns>
+    <app-table-column matColumnDef="name">
+      <ng-template let-item> {{ item.name }} </ng-template>
+    </app-table-column>
+
+    <app-table-column matColumnDef="username">
+      <ng-template let-item> {{ item.name }} </ng-template>
+    </app-table-column>
+
+    <app-table-column matColumnDef="email">
+      <ng-template let-item> {{ item.name }} </ng-template>
+    </app-table-column>
+
+    <app-table-column matColumnDef="phone">
+      <ng-template let-item> {{ item.phone }} </ng-template>
+    </app-table-column>
+
+    <app-table-column matColumnDef="company">
+      <ng-template let-item> {{ item.company.name }} </ng-template>
+    </app-table-column>
+  </app-table-columns>
+</app-table>

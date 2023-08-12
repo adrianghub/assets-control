@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+
+/* 
+css class                   level name     level config
+.mat-headline-1	            -> headline-1	    -> none
+.mat-headline-2	            -> headline-2	    -> none
+.mat-headline-3	            -> headline-3	    -> none
+.mat-headline-4	            -> headline-4	    -> none
+.mat-h1 or .mat-headline-5	-> headline-5	    -> <h1>
+.mat-h2 or .mat-headline-6	-> headline-6	    -> <h2>
+.mat-h3	or .mat-subtitle-1  -> subtitle-1	    -> <h3>
+.mat-body or .mat-body-2    -> body-2	        -> body text
+.mat-small or .mat-caption  -> caption	      -> none
+*/
+
+$typography-config: mat.define-typography-config(
+  $font-family: 'Nunito Sans, sans-serif',
+  $headline-5: mat.define-typography-level(36px, 36px, 600),
+);

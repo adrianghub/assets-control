@@ -1,22 +1,20 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
-import { appRoutes } from './app.routes';
-import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import {
-  provideAnimations,
-  provideNoopAnimations,
-} from '@angular/platform-browser/animations';
+import { provideStore } from '@ngrx/store';
+import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(),
     provideStore(),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideHttpClient(),
     provideAnimations(),
-    provideNoopAnimations(),
   ],
 };
