@@ -4,40 +4,55 @@
     variant="raised"
     color="primary"
     text="Add user"
-    (click)="openUserManagementDialog(dialog)"
+    (click)="openAddUserDialog(addUserDialog)"
   />
 </app-layout-header>
 
-<ng-container *ngIf="(usersFacade.errorMessage$ | async) as error">
-  <p>{{ error }}</p>
-</ng-container>
+<p *ngIf="(usersFacade.errorMessage$ | async) as error; else tableTemplate">
+  {{ error }}
+</p>
 
-<app-table
-  #table
-  [data$]="usersFacade.users$"
-  [loading$]="usersFacade.loading$"
-  [rowHover]="true"
-  (rowSelected)="goToDetails($event, 'users')"
->
-  <app-table-columns>
-    <app-table-column matColumnDef="name">
-      <ng-template let-item> {{ item.name }} </ng-template>
-    </app-table-column>
+<ng-template #tableTemplate>
+  <app-table
+    #table
+    [data$]="usersFacade.users$"
+    [loading$]="usersFacade.loading$"
+    [rowHover]="true"
+    (rowSelected)="goToDetails($event, 'users')"
+  >
+    <app-table-columns>
+      <app-table-column matColumnDef="Name">
+        <ng-template let-item> {{ item.name }} </ng-template>
+      </app-table-column>
 
-    <app-table-column matColumnDef="username">
-      <ng-template let-item> {{ item.name }} </ng-template>
-    </app-table-column>
+      <app-table-column matColumnDef="Username">
+        <ng-template let-item> {{ item.username }} </ng-template>
+      </app-table-column>
 
-    <app-table-column matColumnDef="email">
-      <ng-template let-item> {{ item.name }} </ng-template>
-    </app-table-column>
+      <app-table-column matColumnDef="Email">
+        <ng-template let-item> {{ item.email }} </ng-template>
+      </app-table-column>
 
-    <app-table-column matColumnDef="phone">
-      <ng-template let-item> {{ item.phone }} </ng-template>
-    </app-table-column>
-  </app-table-columns>
-</app-table>
+      <app-table-column matColumnDef="Phone">
+        <ng-template let-item> {{ item.phone }} </ng-template>
+      </app-table-column>
 
-<ng-template #dialog let-data>
+      <app-table-column matColumnDef="Actions">
+        <ng-template let-item>
+          <app-icon-button
+            icon="edit"
+            (click)="openEditUserDialog($event, editUserDialog, item)"
+          />
+        </ng-template>
+      </app-table-column>
+    </app-table-columns>
+  </app-table>
+</ng-template>
+
+<ng-template #addUserDialog let-data>
+  <app-user-management-dialog [data]="data" />
+</ng-template>
+
+<ng-template #editUserDialog let-data>
   <app-user-management-dialog [data]="data" />
 </ng-template>

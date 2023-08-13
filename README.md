@@ -11,7 +11,7 @@
   - [ ] Users
     - [x] Show users data
     - [x] Add user
-    - [ ] Edit user data
+    - [x] Edit user data
     - [ ] Show todos for selected user
     - [ ] Add/edit/delete todos
     - [ ] Show albums for selected user

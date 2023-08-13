@@ -2,19 +2,23 @@ import { DialogData } from '@/shared/ui/organisms/dialog/dialog.component';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   Input,
   OnInit,
+  inject,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { InputComponent } from '@/shared/ui/atoms/input/input.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 import { User } from '../users.model';
 
 interface UserFormGroup {
   name: FormControl<string>;
   username: FormControl<string>;
   email: FormControl<string>;
-  phone: FormControl<number | null>;
+  phone: FormControl<string>;
 }
 
 export interface UserParams {
@@ -35,7 +39,10 @@ export interface UserParams {
 export class UserManagementDialog implements OnInit {
   @Input() data!: DialogData<User, UserParams>;
 
-  form!: FormGroup<UserFormGroup>;
+  protected form!: FormGroup<UserFormGroup>;
+  protected userId!: number;
+
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.form = new FormGroup<UserFormGroup>({
@@ -51,31 +58,38 @@ export class UserManagementDialog implements OnInit {
         nonNullable: true,
         validators: [Validators.required, Validators.email],
       }),
-      phone: new FormControl(null, {
+      phone: new FormControl('', {
         nonNullable: true,
         validators: [
           Validators.required,
-          Validators.pattern(/^\d+$/),
           Validators.minLength(9),
-          Validators.maxLength(9),
+          Validators.maxLength(32),
         ],
       }),
     });
 
-    this.form.valueChanges.subscribe(({ name, username, email, phone }) => {
-      this.data.options.disabled = this.form.invalid;
-
-      if (!name || !username || !email || !phone) {
-        return;
-      }
-
-      this.setResult({
-        name: name.trim(),
-        username: username.trim(),
-        email: email.trim(),
-        phone: String(phone),
+    this.data.input$
+      ?.pipe(take(1))
+      .subscribe(({ name, username, email, phone }) => {
+        this.form.setValue({ name, username, email, phone });
       });
-    });
+
+    this.form.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ name, username, email, phone }) => {
+        this.data.options.disabled = this.form.invalid;
+
+        if (!name || !username || !email || !phone) {
+          return;
+        }
+
+        this.setResult({
+          name: name.trim(),
+          username: username.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+        });
+      });
   }
 
   setResult(params: UserParams): void {

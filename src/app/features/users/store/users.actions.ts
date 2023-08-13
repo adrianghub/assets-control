@@ -9,5 +9,7 @@ export const usersActions = createActionGroup({
     usersLoadedFailure: props<{ errorMessage: string }>(),
     addUser: props<{ user: User }>(),
     addUserSuccess: emptyProps(),
+    editUser: props<{ user: User }>(),
+    editUserSuccess: emptyProps(),
   },
 });

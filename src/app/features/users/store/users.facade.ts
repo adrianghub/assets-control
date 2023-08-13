@@ -19,4 +19,8 @@ export class UsersFacade {
   addUser(user: User): void {
     this.store.dispatch(usersActions.addUser({ user }));
   }
+
+  editUser(user: User): void {
+    this.store.dispatch(usersActions.editUser({ user }));
+  }
 }

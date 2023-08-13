@@ -1,25 +1,35 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
 import { usersActions } from './users.actions';
+import { UsersFacade } from './users.facade';
 import { UsersRepository } from './users.repository';
 
 export const loadUsers = createEffect(
-  (actions$ = inject(Actions), usersRepository = inject(UsersRepository)) => {
+  (
+    actions$ = inject(Actions),
+    usersRepository = inject(UsersRepository),
+    usersFacade = inject(UsersFacade)
+  ) => {
     return actions$.pipe(
       ofType(usersActions.usersLoading),
-      switchMap(() => {
-        return usersRepository.getUsers().pipe(
-          map((users) => usersActions.usersLoadedSuccess({ users })),
-          catchError(() =>
-            of(
-              usersActions.usersLoadedFailure({
-                errorMessage:
-                  'Failed to load users. Please refresh the browser.',
-              })
+      withLatestFrom(usersFacade.users$),
+      exhaustMap(([, users]) => {
+        if (users.length) {
+          return of(usersActions.usersLoadedSuccess({ users }));
+        } else {
+          return usersRepository.getUsers().pipe(
+            map((users) => usersActions.usersLoadedSuccess({ users })),
+            catchError(() =>
+              of(
+                usersActions.usersLoadedFailure({
+                  errorMessage:
+                    'Failed to load users. Please refresh the browser.',
+                })
+              )
             )
-          )
-        );
+          );
+        }
       })
     );
   },
@@ -30,13 +40,34 @@ export const addUser = createEffect(
   (actions$ = inject(Actions), usersRepository = inject(UsersRepository)) => {
     return actions$.pipe(
       ofType(usersActions.addUser),
-      switchMap(({ user }) => {
+      exhaustMap(({ user }) => {
         return usersRepository.postUser(user).pipe(
           map(() => usersActions.addUserSuccess()),
           catchError(() =>
             of(
               usersActions.usersLoadedFailure({
                 errorMessage: 'Failed to add user. Please try again.',
+              })
+            )
+          )
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const editUser = createEffect(
+  (actions$ = inject(Actions), usersRepository = inject(UsersRepository)) => {
+    return actions$.pipe(
+      ofType(usersActions.editUser),
+      exhaustMap(({ user }) => {
+        return usersRepository.patchUser(user).pipe(
+          map(() => usersActions.editUserSuccess()),
+          catchError(() =>
+            of(
+              usersActions.usersLoadedFailure({
+                errorMessage: 'Failed to edit user. Please try again.',
               })
             )
           )

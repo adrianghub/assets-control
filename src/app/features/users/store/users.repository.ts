@@ -27,4 +27,11 @@ export class UsersRepository {
       params
     );
   }
+
+  patchUser(params: User): Observable<UserParams> {
+    return this.http.patch<UserParams>(
+      `${environment.jsonPlaceholderApiUrl}/users/${params.id}`,
+      params
+    );
+  }
 }

@@ -34,6 +34,10 @@ const reducer = createReducer(
   on(usersActions.addUser, (state, { user }) => ({
     ...state,
     users: [...state.users, user],
+  })),
+  on(usersActions.editUser, (state, { user }) => ({
+    ...state,
+    users: [...state.users.map((u) => (u.id === user.id ? user : u))],
   }))
 );
 
