@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@use '_color-palettes' as palettes;
+
 :host {
   display: flex;
   align-items: center;
@@ -5,5 +8,23 @@
 }
 
 .layout-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin-right: auto;
+}
+
+.header-title {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-link.active {
+  color: mat.get-color-from-palette(palettes.$brown-palette, 500);
+  text-decoration: underline;
 }

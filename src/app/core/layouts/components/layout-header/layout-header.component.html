@@ -1,7 +1,20 @@
 <div class="layout-header-left">
-  <h1 class="semi-bold-headline-large">{{ title }}</h1>
+  <h1 class="header-title">{{ title }}</h1>
+
+  <ng-content select="[actions]" />
 </div>
 
-<ng-content select="[actions]" />
+<nav class="nav">
+  <ul *ngFor="let link of menuLinks">
+    <li>
+      <a
+        [href]="link.path"
+        class="nav-link"
+        [class.active]="link.path === router.routerState.snapshot.url"
+        >{{ link.label }}</a
+      >
+    </li>
+  </ul>
+</nav>
 
 <mat-divider />
