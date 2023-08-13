@@ -9,8 +9,8 @@
   - [x] Config state management
 - [ ] Features
   - [ ] Users
-    - [ ] Show users data
-    - [ ] Add user
+    - [x] Show users data
+    - [x] Add user
     - [ ] Edit user data
     - [ ] Show todos for selected user
     - [ ] Add/edit/delete todos
