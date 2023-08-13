@@ -15,5 +15,5 @@ css class                   level name     level config
 
 $typography-config: mat.define-typography-config(
   $font-family: 'Nunito Sans, sans-serif',
-  $headline-5: mat.define-typography-level(36px, 36px, 600),
+  $headline-5: mat.define-typography-level(36px, 36px, 500),
 );
