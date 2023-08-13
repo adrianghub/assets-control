@@ -5,7 +5,9 @@ import { TableColumnComponent } from '@/app/shared/ui/atoms/table-column/table-c
 import { TableColumnsComponent } from '@/app/shared/ui/organisms/table/table-columns.component';
 import { TableComponent } from '@/app/shared/ui/organisms/table/table.component';
 import { NgFor } from '@angular/common';
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import {
   MatColumnDef,
@@ -13,43 +15,45 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { take } from 'rxjs';
+import { UserManagementDialog } from '../../dialogs/user-management.dialog';
+import { UserManagementService } from '../../user-management.service';
 import { User } from '../../users.model';
-import { UsersService } from '../../users.service';
+import { UsersRepository } from '../../users.repository';
 
 @Component({
   standalone: true,
   imports: [
     RouterModule,
     MatTableModule,
+    MatDialogModule,
     ButtonComponent,
     TableComponent,
     TableColumnComponent,
     TableColumnsComponent,
     LayoutHeaderComponent,
     NgFor,
+    UserManagementDialog,
+    HttpClientModule,
   ],
   providers: [MatColumnDef],
   selector: 'app-users-page',
   templateUrl: './users.page.html',
 })
-export class UsersPage extends TablePageAbstract implements OnInit {
+export class UsersPage extends TablePageAbstract {
   @ViewChild('paginator') paginator!: MatPaginator;
 
   protected dataSource!: MatTableDataSource<User>;
   protected resultsLength!: number;
   protected pageSizeOptions: number[] = [5, 10];
 
-  protected usersService = inject(UsersService);
+  protected usersRepository = inject(UsersRepository);
+  protected userManagementService = inject(UserManagementService);
+  protected dialog = inject(MatDialog);
 
-  ngOnInit() {
-    this.usersService
-      .getUsers()
-      .pipe(take(1))
-      .subscribe((users) => {
-        this.dataSource = new MatTableDataSource(users);
-        this.dataSource.paginator = this.paginator;
-        this.resultsLength = users.length;
-      });
+  openUserManagementDialog(dialogRef: TemplateRef<MatDialog>) {
+    this.userManagementService.openUserAddDialog({
+      dialogRef,
+      dialog: this.dialog,
+    });
   }
 }

@@ -1,0 +1,17 @@
+.mat-mdc-outlined-button > .mat-icon {
+  margin: 0 !important;
+}
+
+.mdc-icon-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: black;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}

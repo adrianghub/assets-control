@@ -7,18 +7,19 @@ import {
   Output,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
-  imports: [MatButtonModule, NgClass],
-  selector: 'app-button',
-  templateUrl: './button.component.html',
+  imports: [NgClass, MatButtonModule, MatIconModule],
+  selector: 'app-icon-button',
+  templateUrl: './icon-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent {
-  @Input({ required: true }) text = '';
+export class IconButtonComponent {
+  @Input({ required: true }) icon!: string;
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() variant: 'raised' | 'stroked' | 'flat' | 'menu' = 'stroked';
+  @Input() type: 'raised' | 'stroked' | 'flat' | 'menu' = 'stroked';
   @Input() disabled = false;
 
   @Output() clicked: EventEmitter<void> = new EventEmitter<void>();

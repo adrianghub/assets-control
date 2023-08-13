@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+@use '_color-palettes' as palettes;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 12px;
+  background-color: palettes.$light-primary-text;
+}
+
+.buttons-group {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}

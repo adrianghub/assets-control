@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { User } from '../../users.model';
-import { UsersService } from '../../users.service';
+import { UsersRepository } from '../../users.repository';
 
 @Component({
   standalone: true,
@@ -23,14 +23,14 @@ import { UsersService } from '../../users.service';
   templateUrl: './user-details.page.html',
 })
 export class UserDetailsPage implements OnInit {
-  protected usersService = inject(UsersService);
+  protected userRepository = inject(UsersRepository);
   protected route = inject(ActivatedRoute);
 
   protected user!: User;
 
   ngOnInit() {
-    this.usersService
-      .getUser(this.route.snapshot.params['id'])
+    this.userRepository
+      .getUserDetails(this.route.snapshot.params['id'])
       .pipe(take(1))
       .subscribe((user) => {
         this.user = user;

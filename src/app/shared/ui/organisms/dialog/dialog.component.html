@@ -1,0 +1,26 @@
+<h2 *ngIf="data.labels.title" class="header">
+  {{ data.labels.title }}
+</h2>
+
+<div class="template" mat-dialog-content>
+  <ng-container
+    *ngTemplateOutlet="data.templateRef; context: { $implicit: data }"
+  />
+</div>
+
+<div mat-dialog-actions>
+  <div class="buttons-group">
+    <app-button
+      variant="raised"
+      [mat-dialog-close]="data.result"
+      [text]="data.labels.submit"
+      [disabled]="data.options.disabled"
+    />
+
+    <app-button
+      color="accent"
+      [mat-dialog-close]=""
+      [text]="data.labels.cancel"
+    />
+  </div>
+</div>

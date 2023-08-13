@@ -1,10 +1,16 @@
 <app-layout-header title="Users">
-  <app-button actions type="raised" color="primary" text="Add user" />
+  <app-button
+    actions
+    variant="raised"
+    color="primary"
+    text="Add user"
+    (clicked)="openUserManagementDialog(dialog)"
+  />
 </app-layout-header>
 
 <app-table
   #table
-  [data$]="usersService.getUsers()"
+  [data$]="usersRepository.getUsers()"
   [rowHover]="true"
   (rowSelected)="goToDetails($event, 'users')"
 >
@@ -30,3 +36,7 @@
     </app-table-column>
   </app-table-columns>
 </app-table>
+
+<ng-template #dialog let-data>
+  <app-user-management-dialog [data]="data" />
+</ng-template>
