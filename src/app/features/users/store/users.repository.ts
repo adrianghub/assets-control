@@ -2,12 +2,10 @@ import { environment } from '@/env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserParams } from './dialogs/user-management.dialog';
-import { User, UserDto } from './users.model';
+import { UserParams } from '../dialogs/user-management.dialog';
+import { User, UserDto } from '../users.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UsersRepository {
   private http = inject(HttpClient);
 

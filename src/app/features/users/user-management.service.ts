@@ -2,12 +2,13 @@ import {
   DialogComponent,
   DialogData,
 } from '@/app/shared/ui/organisms/dialog/dialog.component';
-import { Injectable, TemplateRef, inject } from '@angular/core';
+import { DestroyRef, Injectable, TemplateRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, filter, switchMap, take } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { UserParams } from './dialogs/user-management.dialog';
+import { UsersFacade } from './store/users.facade';
 import { User } from './users.model';
-import { UsersRepository } from './users.repository';
 
 interface DialogParams {
   details$?: Observable<User>;
@@ -17,9 +18,10 @@ interface DialogParams {
 
 @Injectable()
 export class UserManagementService {
-  private usersRepository = inject(UsersRepository);
+  private usersFacade = inject(UsersFacade);
+  private destroyRef = inject(DestroyRef);
 
-  openUserAddDialog({ dialog, dialogRef }: DialogParams): void {
+  openAddUserDialog({ dialog, dialogRef }: DialogParams): void {
     dialog
       .open(DialogComponent, {
         data: {
@@ -30,7 +32,7 @@ export class UserManagementService {
             cancel: 'Cancel',
           },
           options: {
-            disabled: false,
+            disabled: true,
           },
         } as DialogData<User, UserParams>,
         disableClose: true,
@@ -38,10 +40,9 @@ export class UserManagementService {
       })
       .afterClosed()
       .pipe(
-        take(1),
         filter((results) => !!results),
-        switchMap((results) => this.usersRepository.postUser(results))
+        takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe();
+      .subscribe((results) => this.usersFacade.addUser(results));
   }
 }
