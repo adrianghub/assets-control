@@ -1,4 +1,4 @@
-<mat-progress-bar mode="determinate" />
+<mat-progress-bar mode="indeterminate" *ngIf="loading$ | async" />
 <div>
   <table #table mat-table [dataSource]="dataSource">
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

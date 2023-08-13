@@ -9,4 +9,24 @@
     aria-label="Clear"
     (click)="control.reset()"
   />
+
+  <mat-error *ngIf="(control.errors | keyvalue)?.[0] as error">
+    <ng-container [ngSwitch]="error.key">
+      <span *ngSwitchCase="'minlength'">
+        Phone number should contain minimum
+        {{ error.value.requiredLength }} digits.
+      </span>
+
+      <span *ngSwitchCase="'maxlength'">
+        Phone number should contain maximum
+        {{ error.value.requiredLength }} digits.
+      </span>
+
+      <span *ngSwitchCase="'email'">
+        Email should be typed in correct format.
+      </span>
+
+      <span *ngSwitchDefault> {{ label }} is required. </span>
+    </ng-container>
+  </mat-error>
 </mat-form-field>

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +11,7 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   imports: [
-    NgIf,
+    CommonModule,
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
@@ -19,7 +19,7 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
   ],
 })
 export class InputComponent {
-  @Input() type: 'text' | 'number' = 'text';
+  @Input() type: 'text' | 'number' | 'email' = 'text';
   @Input() control!: FormControl<string | number | null>;
   @Input() label!: string;
 }

@@ -6,8 +6,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
+import { UsersRepository } from '../../store/users.repository';
 import { User } from '../../users.model';
-import { UsersRepository } from '../../users.repository';
 
 @Component({
   standalone: true,

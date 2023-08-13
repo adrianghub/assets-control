@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,7 +21,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -36,6 +39,7 @@ import { Observable, take } from 'rxjs';
 })
 export class TableComponent<T> implements OnInit {
   @Input({ required: true }) data$!: Observable<T[]>;
+  @Input({ required: true }) loading$!: Observable<boolean>;
   @Input() pageSizeOptions: number[] = [5, 10];
   @Input() pageSize = 10;
   @Input() rowHover = false;
@@ -45,12 +49,14 @@ export class TableComponent<T> implements OnInit {
   @ViewChild(MatTable, { static: true }) table!: MatTable<TableComponent<T>>;
   @ViewChild('paginator') paginator!: MatPaginator;
 
-  dataSource!: MatTableDataSource<T>;
+  protected dataSource!: MatTableDataSource<T>;
+  protected resultsLength!: number;
   displayedColumns: string[] = [];
-  resultsLength!: number;
+
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.data$.pipe(take(1)).subscribe((data) => {
+    this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.resultsLength = data.length;
