@@ -35,8 +35,9 @@ import { Observable, take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent<T> implements OnInit {
-  @Input() data$!: Observable<T[]>;
+  @Input({ required: true }) data$!: Observable<T[]>;
   @Input() pageSizeOptions: number[] = [5, 10];
+  @Input() pageSize = 10;
   @Input() rowHover = false;
 
   @Output() rowSelected = new EventEmitter<TableRow>();

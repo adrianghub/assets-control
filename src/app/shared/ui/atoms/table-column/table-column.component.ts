@@ -13,7 +13,7 @@ import {
   MatHeaderCellDef,
   MatTableModule,
 } from '@angular/material/table';
-import { TableComponent } from '../../molecules/table/table.component';
+import { TableComponent } from '../../organisms/table/table.component';
 
 @Component({
   standalone: true,

@@ -13,4 +13,10 @@ export class UsersService {
       `${environment.jsonPlaceholderApiUrl}/users`
     );
   }
+
+  getUser(id: number): Observable<User> {
+    return this.http.get<UserDto>(
+      `${environment.jsonPlaceholderApiUrl}/users/${id}`
+    );
+  }
 }

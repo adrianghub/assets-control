@@ -1,5 +1,6 @@
+import { UsersPage } from '@/app/features/users/pages/users/users.page';
 import { Route } from '@angular/router';
-import { UsersPage } from '@/features/users/pages/users.page';
+import { UserDetailsPage } from './pages/user-details/user-details.page';
 import { UsersService } from './users.service';
 
 export const usersRoutes: Route[] = [
@@ -10,6 +11,10 @@ export const usersRoutes: Route[] = [
       {
         path: '',
         component: UsersPage,
+      },
+      {
+        path: ':id',
+        component: UserDetailsPage,
       },
     ],
   },

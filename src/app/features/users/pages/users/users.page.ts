@@ -1,11 +1,11 @@
+import { LayoutHeaderComponent } from '@/app/core/layouts/components/layout-header/layout-header.component';
 import { TablePageAbstract } from '@/app/shared/table-page.abstract';
 import { ButtonComponent } from '@/app/shared/ui/atoms/button/button.component';
 import { TableColumnComponent } from '@/app/shared/ui/atoms/table-column/table-column.component';
-import { TableColumnsComponent } from '@/app/shared/ui/molecules/table/table-columns.component';
-import { TableComponent } from '@/app/shared/ui/molecules/table/table.component';
+import { TableColumnsComponent } from '@/app/shared/ui/organisms/table/table-columns.component';
+import { TableComponent } from '@/app/shared/ui/organisms/table/table.component';
 import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
 import {
   MatColumnDef,
@@ -14,19 +14,19 @@ import {
 } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { take } from 'rxjs';
-import { User } from '../users.model';
-import { UsersService } from '../users.service';
+import { User } from '../../users.model';
+import { UsersService } from '../../users.service';
 
 @Component({
   standalone: true,
   imports: [
     RouterModule,
-    MatButtonModule,
     MatTableModule,
     ButtonComponent,
     TableComponent,
     TableColumnComponent,
     TableColumnsComponent,
+    LayoutHeaderComponent,
     NgFor,
   ],
   providers: [MatColumnDef],
