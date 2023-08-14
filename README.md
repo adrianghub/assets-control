@@ -12,8 +12,8 @@
     - [x] Show users data
     - [x] Add user
     - [x] Edit user data
-    - [ ] Show todos for selected user
-    - [ ] Add/edit/delete todos
+    - [x] Show todos for selected user
+    - [x] Add/edit/delete todos
     - [ ] Show albums for selected user
     - [ ] Test units/e2e
   - [ ] Albums

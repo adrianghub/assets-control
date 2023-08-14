@@ -3,8 +3,8 @@ import { DestroyRef, Injectable, TemplateRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, of } from 'rxjs';
-import { UsersFacade } from './store/users.facade';
-import { User } from './users.model';
+import { User } from '../models/users.model';
+import { UsersFacade } from '../store/users/users.facade';
 
 interface DialogParams {
   dialog: MatDialog;
@@ -46,8 +46,6 @@ export class UserManagementService {
     dialogRef,
     userDetails,
   }: DialogParams & { userDetails: User }): void {
-    console.log(userDetails);
-
     dialog
       .open(DialogComponent, {
         data: {

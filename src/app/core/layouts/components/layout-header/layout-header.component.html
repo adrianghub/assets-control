@@ -1,20 +1,24 @@
-<div class="layout-header-left">
-  <h1 class="header-title">{{ title }}</h1>
+<div class="header">
+  <a class="mat-headline-3 header-title" [routerLink]="'/'">{{ title }}</a>
+
+  <nav class="nav">
+    <ul *ngFor="let link of menuLinks">
+      <li>
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="active"
+          class="nav-link"
+          >{{ link.label }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<mat-divider class="divider" />
+
+<div class="subheader">
+  <h1 class="mat-h1 header-title">{{ subtitle }}</h1>
 
   <ng-content select="[actions]" />
 </div>
-
-<nav class="nav">
-  <ul *ngFor="let link of menuLinks">
-    <li>
-      <a
-        [href]="link.path"
-        class="nav-link"
-        [class.active]="link.path === router.routerState.snapshot.url"
-        >{{ link.label }}</a
-      >
-    </li>
-  </ul>
-</nav>
-
-<mat-divider />

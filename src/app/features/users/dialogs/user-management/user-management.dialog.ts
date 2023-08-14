@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputComponent } from '@/shared/ui/atoms/input/input.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
-import { User } from '../users.model';
+import { User } from '../../models/users.model';
 
 interface UserFormGroup {
   name: FormControl<string>;
@@ -40,7 +40,6 @@ export class UserManagementDialog implements OnInit {
   @Input() data!: DialogData<User, UserParams>;
 
   protected form!: FormGroup<UserFormGroup>;
-  protected userId!: number;
 
   private destroyRef = inject(DestroyRef);
 

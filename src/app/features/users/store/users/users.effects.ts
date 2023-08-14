@@ -45,8 +45,8 @@ export const addUser = createEffect(
           map(() => usersActions.addUserSuccess()),
           catchError(() =>
             of(
-              usersActions.usersLoadedFailure({
-                errorMessage: 'Failed to add user. Please try again.',
+              usersActions.addUserFailure({
+                userActionErrorMessage: 'Failed to add user. Please try again.',
               })
             )
           )
@@ -66,8 +66,9 @@ export const editUser = createEffect(
           map(() => usersActions.editUserSuccess()),
           catchError(() =>
             of(
-              usersActions.usersLoadedFailure({
-                errorMessage: 'Failed to edit user. Please try again.',
+              usersActions.editUserFailure({
+                userActionErrorMessage:
+                  'Failed to edit user. Please try again.',
               })
             )
           )

@@ -18,8 +18,8 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
     IconButtonComponent,
   ],
 })
-export class InputComponent {
+export class InputComponent<T> {
+  @Input({ required: true }) control!: FormControl<T>;
+  @Input({ required: true }) label!: string;
   @Input() type: 'text' | 'number' | 'email' = 'text';
-  @Input() control!: FormControl<string | number | null>;
-  @Input() label!: string;
 }

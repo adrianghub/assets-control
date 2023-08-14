@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { User } from '../users.model';
+import { User } from '../../models/users.model';
 import { usersActions } from './users.actions';
 import { usersFeature } from './users.state';
 

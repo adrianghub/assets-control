@@ -1,17 +1,19 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { User } from '../users.model';
+import { User } from '../../models/users.model';
 import { usersActions } from './users.actions';
 
-interface State {
+interface UsersState {
   users: User[];
   loading: boolean;
   errorMessage: string | null;
+  userActionErrorMessage: string | null;
 }
 
-const initialState: State = {
+const initialState: UsersState = {
   users: [],
   loading: false,
   errorMessage: null,
+  userActionErrorMessage: null,
 };
 
 const reducer = createReducer(
@@ -35,9 +37,19 @@ const reducer = createReducer(
     ...state,
     users: [...state.users, user],
   })),
+  on(usersActions.addUserFailure, (state, { userActionErrorMessage }) => ({
+    ...state,
+    loading: false,
+    userActionErrorMessage,
+  })),
   on(usersActions.editUser, (state, { user }) => ({
     ...state,
     users: [...state.users.map((u) => (u.id === user.id ? user : u))],
+  })),
+  on(usersActions.editUserFailure, (state, { userActionErrorMessage }) => ({
+    ...state,
+    loading: false,
+    userActionErrorMessage,
   }))
 );
 

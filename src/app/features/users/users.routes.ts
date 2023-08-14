@@ -3,15 +3,21 @@ import { Route } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { UserDetailsPage } from './pages/user-details/user-details.page';
-import * as usersEffects from './store/users.effects';
-import { UsersFacade } from './store/users.facade';
-import { UsersRepository } from './store/users.repository';
-import { usersFeature } from './store/users.state';
-import { UserManagementService } from './user-management.service';
+import { TodoManagementService } from './services/todos-management.service';
+import { UserManagementService } from './services/users-management.service';
+import * as userDetailsEffects from './store/user-details/user-details.effects';
+import { UserDetailsFacade } from './store/user-details/user-details.facade';
+import { UserDetailsRepository } from './store/user-details/user-details.repository';
+import { userDetailsFeature } from './store/user-details/user-details.state';
+import * as usersEffects from './store/users/users.effects';
+import { UsersFacade } from './store/users/users.facade';
+import { UsersRepository } from './store/users/users.repository';
+import { usersFeature } from './store/users/users.state';
 
 export const usersRoutes: Route[] = [
   {
     path: '',
+    component: UsersPage,
     providers: [
       UserManagementService,
       UsersRepository,
@@ -19,15 +25,16 @@ export const usersRoutes: Route[] = [
       provideState(usersFeature),
       provideEffects(usersEffects),
     ],
-    children: [
-      {
-        path: '',
-        component: UsersPage,
-      },
-      {
-        path: ':id',
-        component: UserDetailsPage,
-      },
+  },
+  {
+    path: ':id',
+    component: UserDetailsPage,
+    providers: [
+      TodoManagementService,
+      UserDetailsRepository,
+      UserDetailsFacade,
+      provideState(userDetailsFeature),
+      provideEffects(userDetailsEffects),
     ],
   },
 ];

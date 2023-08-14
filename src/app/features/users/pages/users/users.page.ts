@@ -10,10 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatColumnDef, MatTableModule } from '@angular/material/table';
-import { UserManagementDialog } from '../../dialogs/user-management.dialog';
-import { UsersFacade } from '../../store/users.facade';
-import { UserManagementService } from '../../user-management.service';
-import { User } from '../../users.model';
+import { UserManagementDialog } from '../../dialogs/user-management/user-management.dialog';
+import { User } from '../../models/users.model';
+import { UserManagementService } from '../../services/users-management.service';
+import { UsersFacade } from '../../store/users/users.facade';
 
 @Component({
   standalone: true,
@@ -26,9 +26,9 @@ import { User } from '../../users.model';
     TableColumnComponent,
     TableColumnsComponent,
     LayoutHeaderComponent,
-    UserManagementDialog,
     HttpClientModule,
     IconButtonComponent,
+    UserManagementDialog,
   ],
   providers: [MatColumnDef],
   selector: 'app-users-page',

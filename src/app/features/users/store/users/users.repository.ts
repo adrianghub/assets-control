@@ -2,8 +2,8 @@ import { environment } from '@/env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserParams } from '../dialogs/user-management.dialog';
-import { User, UserDto } from '../users.model';
+import { UserParams } from '../../dialogs/user-management/user-management.dialog';
+import { User, UserDto } from '../../models/users.model';
 
 @Injectable()
 export class UsersRepository {
@@ -12,12 +12,6 @@ export class UsersRepository {
   getUsers(): Observable<User[]> {
     return this.http.get<UserDto[]>(
       `${environment.jsonPlaceholderApiUrl}/users`
-    );
-  }
-
-  getUserDetails(id: number): Observable<User> {
-    return this.http.get<UserDto>(
-      `${environment.jsonPlaceholderApiUrl}/users/${id}`
     );
   }
 

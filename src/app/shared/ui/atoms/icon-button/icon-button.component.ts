@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class IconButtonComponent {
   @Input({ required: true }) icon!: string;
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() type: 'raised' | 'stroked' | 'flat' | 'menu' = 'stroked';
+  @Input() type: 'raised' | 'stroked' | 'flat' | 'menu' = 'menu';
   @Input() disabled = false;
 
   @Output() clicked: EventEmitter<void> = new EventEmitter<void>();

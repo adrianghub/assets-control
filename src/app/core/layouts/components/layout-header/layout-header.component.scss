@@ -3,28 +3,37 @@
 
 :host {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 24px;
 }
 
-.layout-header-left {
+.header {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-right: auto;
+  justify-content: space-between;
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-link.active {
+    color: mat.get-color-from-palette(palettes.$brown-palette, 500);
+    text-decoration: underline;
+  }
 }
 
 .header-title {
   margin: 0;
 }
 
-.nav {
+.divider {
+  margin: 16px 0 32px;
+}
+
+.subheader {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.nav-link.active {
-  color: mat.get-color-from-palette(palettes.$brown-palette, 500);
-  text-decoration: underline;
+  margin-right: auto;
 }
