@@ -14,13 +14,14 @@ import { InputComponent } from '@/shared/ui/atoms/input/input.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
 import { Todo } from '../../models/todos.model';
+import { notEmptyValidator } from '../../validators/notEmpty.validator';
 
-interface UserFormGroup {
+interface TodoFormGroup {
   title: FormControl<string>;
   completed: FormControl<boolean>;
 }
 
-export interface UserParams {
+export interface TodoParams {
   title: string;
   completed: boolean;
 }
@@ -41,17 +42,17 @@ type Completed = 'Yes' | 'No';
   imports: [InputComponent, SelectComponent],
 })
 export class TodoManagementDialog implements OnInit {
-  @Input() data!: DialogData<Todo, UserParams>;
+  @Input() data!: DialogData<Todo, TodoParams>;
 
-  protected form!: FormGroup<UserFormGroup>;
+  protected form!: FormGroup<TodoFormGroup>;
 
   private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.form = new FormGroup<UserFormGroup>({
+    this.form = new FormGroup<TodoFormGroup>({
       title: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [Validators.required, notEmptyValidator],
       }),
       completed: new FormControl(false, {
         nonNullable: true,
@@ -82,7 +83,7 @@ export class TodoManagementDialog implements OnInit {
       });
   }
 
-  setResult(params: UserParams): void {
+  setResult(params: TodoParams): void {
     this.data.result = params;
   }
 

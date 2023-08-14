@@ -13,6 +13,7 @@ import { InputComponent } from '@/shared/ui/atoms/input/input.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
 import { User } from '../../models/users.model';
+import { notEmptyValidator } from '../../validators/notEmpty.validator';
 
 interface UserFormGroup {
   name: FormControl<string>;
@@ -47,11 +48,11 @@ export class UserManagementDialog implements OnInit {
     this.form = new FormGroup<UserFormGroup>({
       name: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [notEmptyValidator],
       }),
       username: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [notEmptyValidator],
       }),
       email: new FormControl('', {
         nonNullable: true,
@@ -60,7 +61,7 @@ export class UserManagementDialog implements OnInit {
       phone: new FormControl('', {
         nonNullable: true,
         validators: [
-          Validators.required,
+          notEmptyValidator,
           Validators.minLength(9),
           Validators.maxLength(32),
         ],
