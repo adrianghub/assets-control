@@ -15,11 +15,12 @@
     - [x] Show todos for selected user
     - [x] Add/edit/delete todos
     - [ ] Show albums for selected user
-    - [ ] Test units/e2e
   - [ ] Albums
-    - [ ] Show albums
+    - [x] Show albums
     - [ ] Show pictures for chosen album
-    - [ ] Test units/e2e
+- [ ] Test units/e2e
+  - [ ] Users
+  - [ ] Albums
 
 ## Local Development
 

@@ -10,6 +10,10 @@
   border: 1px solid mat.get-color-from-palette(palettes.$brown-palette, 50) !important;
 }
 
+tr.mat-mdc-row.row-hover .mat-mdc-cell {
+  transition: background-color 0.2s ease-in-out;
+}
+
 tr.mat-mdc-row.row-hover:hover .mat-mdc-cell {
   background-color: #f0ecec;
   cursor: pointer;

@@ -19,9 +19,9 @@ export const usersRoutes: Route[] = [
     path: '',
     component: UsersPage,
     providers: [
-      UserManagementService,
-      UsersRepository,
       UsersFacade,
+      UsersRepository,
+      UserManagementService,
       provideState(usersFeature),
       provideEffects(usersEffects),
     ],
@@ -30,9 +30,9 @@ export const usersRoutes: Route[] = [
     path: ':id',
     component: UserDetailsPage,
     providers: [
-      TodoManagementService,
-      UserDetailsRepository,
       UserDetailsFacade,
+      UserDetailsRepository,
+      TodoManagementService,
       provideState(userDetailsFeature),
       provideEffects(userDetailsEffects),
     ],
