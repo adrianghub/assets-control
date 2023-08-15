@@ -1,6 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  exhaustMap,
+  map,
+  of,
+  withLatestFrom,
+} from 'rxjs';
 import { usersActions } from './users.actions';
 import { UsersFacade } from './users.facade';
 import { UsersRepository } from './users.repository';
@@ -14,7 +21,7 @@ export const loadUsers = createEffect(
     return actions$.pipe(
       ofType(usersActions.usersLoading),
       withLatestFrom(usersFacade.users$),
-      exhaustMap(([, users]) => {
+      concatMap(([, users]) => {
         if (users.length) {
           return of(usersActions.usersLoadedSuccess({ users }));
         } else {

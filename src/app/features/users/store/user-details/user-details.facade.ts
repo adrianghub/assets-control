@@ -16,12 +16,12 @@ export class UserDetailsFacade {
     userDetailsFeature.selectTodosErrorMessage
   );
 
-  loadUserDetails(id: number): void {
-    this.store.dispatch(userDetailsActions.userLoading({ id }));
+  loadUserDetails(userId: number): void {
+    this.store.dispatch(userDetailsActions.userLoading({ userId }));
   }
 
-  loadUserTodos(id: number): void {
-    this.store.dispatch(userDetailsActions.todosLoading({ id }));
+  loadUserTodos(userId: number): void {
+    this.store.dispatch(userDetailsActions.todosLoading({ userId }));
   }
 
   addTodo(todo: Todo): void {
@@ -30,6 +30,10 @@ export class UserDetailsFacade {
 
   editTodo(todo: Todo): void {
     this.store.dispatch(userDetailsActions.editTodo({ todo }));
+  }
+
+  deleteTodo(todoId: number): void {
+    this.store.dispatch(userDetailsActions.deleteTodo({ todoId }));
   }
 }
 

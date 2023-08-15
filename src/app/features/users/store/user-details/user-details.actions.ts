@@ -5,11 +5,11 @@ import { User } from '../../models/users.model';
 export const userDetailsActions = createActionGroup({
   source: 'User Details',
   events: {
-    userLoading: props<{ id: number }>(),
+    userLoading: props<{ userId: number }>(),
     userLoadedSuccess: props<{ user: User }>(),
     userLoadedFailure: props<{ userErrorMessage: string }>(),
 
-    todosLoading: props<{ id: number }>(),
+    todosLoading: props<{ userId: number }>(),
     todosLoadedSuccess: props<{ todos: Todo[] }>(),
     todosLoadedFailure: props<{ todosErrorMessage: string }>(),
 
@@ -20,5 +20,9 @@ export const userDetailsActions = createActionGroup({
     editTodo: props<{ todo: Todo }>(),
     editTodoFailure: props<{ todoActionErrorMessage: string }>(),
     editTodoSuccess: emptyProps(),
+
+    deleteTodo: props<{ todoId: number }>(),
+    deleteTodoFailure: props<{ todoActionErrorMessage: string }>(),
+    deleteTodoSuccess: emptyProps(),
   },
 });

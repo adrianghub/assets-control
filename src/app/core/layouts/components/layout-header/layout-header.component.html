@@ -18,6 +18,10 @@
 <mat-divider class="divider" />
 
 <div class="subheader">
+  <a *ngIf="backNavLink" [routerLink]="backNavLink"
+    ><app-icon-button icon="keyboard_backspace"
+  /></a>
+
   <h1 class="mat-h1 header-title">{{ subtitle }}</h1>
 
   <ng-content select="[actions]" />

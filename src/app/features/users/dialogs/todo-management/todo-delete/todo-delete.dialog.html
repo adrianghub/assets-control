@@ -1,0 +1,15 @@
+<ng-container *ngIf="(data.input$ | async) as todo">
+  <p class="mat-h2">
+    Are you sure you want to delete the todo titled <br />
+    <span class="todo-title">{{ todo.title }}</span> {{' '}}?
+    <br />
+  </p>
+
+  <p class="mat-h3">
+    This action has no real impact on the data. <br />
+    Reference {{' '}}
+    <a class="external-link" [href]="externalUrl" target="_blank"
+      >jsonplaceholder.org</a
+    >
+  </p>
+</ng-container>

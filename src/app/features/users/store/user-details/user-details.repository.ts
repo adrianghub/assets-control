@@ -9,15 +9,15 @@ import { User, UserDto } from '../../models/users.model';
 export class UserDetailsRepository {
   private http = inject(HttpClient);
 
-  getUserDetails(id: number): Observable<User> {
+  getUserDetails(userId: number): Observable<User> {
     return this.http.get<UserDto>(
-      `${environment.jsonPlaceholderApiUrl}/users/${id}`
+      `${environment.jsonPlaceholderApiUrl}/users/${userId}`
     );
   }
 
-  getUserTodos(id: number): Observable<Todo[]> {
+  getUserTodos(userId: number): Observable<Todo[]> {
     return this.http.get<TodoDto[]>(
-      `${environment.jsonPlaceholderApiUrl}/users/${id}/todos`
+      `${environment.jsonPlaceholderApiUrl}/users/${userId}/todos`
     );
   }
 
@@ -32,6 +32,12 @@ export class UserDetailsRepository {
     return this.http.patch<Todo>(
       `${environment.jsonPlaceholderApiUrl}/todos/${params.id}`,
       params
+    );
+  }
+
+  deleteTodo(todoId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${environment.jsonPlaceholderApiUrl}/todos/${todoId}`
     );
   }
 }

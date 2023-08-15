@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+@use '_color-palettes' as palettes;
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-status {
+  color: mat.get-color-from-palette(palettes.$red-palette, A200);
+
+  &.done {
+    color: palettes.$green-status;
+  }
+}

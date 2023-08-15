@@ -35,7 +35,7 @@ export class UserManagementService {
       })
       .afterClosed()
       .pipe(
-        filter((results) => !!results),
+        filter((result) => !!result),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((result) => this.usersFacade.addUser(result));
@@ -66,7 +66,7 @@ export class UserManagementService {
       })
       .afterClosed()
       .pipe(
-        filter((results) => !!results),
+        filter((result) => !!result),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((result) =>

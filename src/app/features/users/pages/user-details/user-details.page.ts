@@ -9,6 +9,7 @@ import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { TodoDeleteDialog } from '../../dialogs/todo-management/todo-delete/todo-delete.dialog';
 import { TodoManagementDialog } from '../../dialogs/todo-management/todo-management.dialog';
 import { Todo } from '../../models/todos.model';
 import { User } from '../../models/users.model';
@@ -29,9 +30,11 @@ import { UserDetailsFacade } from '../../store/user-details/user-details.facade'
     TodoManagementDialog,
     MatDialogModule,
     IconButtonComponent,
+    TodoDeleteDialog,
   ],
   selector: 'app-user-details-page',
   templateUrl: './user-details.page.html',
+  styleUrls: ['./user-details.page.scss'],
 })
 export class UserDetailsPage implements OnInit {
   protected userDetailsFacade = inject(UserDetailsFacade);
@@ -63,6 +66,20 @@ export class UserDetailsPage implements OnInit {
     $event.stopPropagation();
 
     this.todosRepositoryService.openEditTodoDialog({
+      todo,
+      dialogRef,
+      dialog: this.dialog,
+    });
+  }
+
+  openDeleteTodoDialog(
+    $event: MouseEvent,
+    dialogRef: TemplateRef<MatDialog>,
+    todo: Todo
+  ) {
+    $event.stopPropagation();
+
+    this.todosRepositoryService.openDeleteTodoDialog({
       todo,
       dialogRef,
       dialog: this.dialog,

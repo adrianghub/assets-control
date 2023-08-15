@@ -82,6 +82,17 @@ const userDetailsReducer = createReducer(
       ...state,
       todoActionErrorMessage,
     })
+  ),
+  on(userDetailsActions.deleteTodo, (state, { todoId }) => ({
+    ...state,
+    todos: [...state.todos.filter((t) => t.id !== todoId)],
+  })),
+  on(
+    userDetailsActions.deleteTodoFailure,
+    (state, { todoActionErrorMessage }) => ({
+      ...state,
+      todoActionErrorMessage,
+    })
   )
 );
 

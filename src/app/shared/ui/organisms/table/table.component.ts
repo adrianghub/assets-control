@@ -1,12 +1,12 @@
 import { TableRow } from '@/app/shared/models/table.model';
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
   inject,
@@ -37,10 +37,10 @@ import { Observable } from 'rxjs';
   templateUrl: './table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent<T> implements OnInit {
+export class TableComponent<T> implements AfterViewInit {
   @Input({ required: true }) data$!: Observable<T[]>;
   @Input({ required: true }) loading$!: Observable<boolean>;
-  @Input() pageSizeOptions: number[] = [5, 10];
+  @Input() pageSizeOptions: number[] = [5, 10, 20];
   @Input() pageSize = 10;
   @Input() rowHover = false;
 
@@ -55,11 +55,13 @@ export class TableComponent<T> implements OnInit {
 
   private destroyRef = inject(DestroyRef);
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.resultsLength = data.length;
+      if (data.length) {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.resultsLength = data.length;
+      }
     });
   }
 }

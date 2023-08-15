@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+@use '_color-palettes' as palettes;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.todo-title {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.external-link {
+  color: mat.get-color-from-palette(palettes.$brown-palette, 700) !important;
+  font-weight: bold;
+}

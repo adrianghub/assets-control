@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, of } from 'rxjs';
 import { userDetailsActions } from './user-details.actions';
 import { UserDetailsRepository } from './user-details.repository';
 
@@ -11,8 +11,8 @@ export const loadUserDetails = createEffect(
   ) => {
     return actions$.pipe(
       ofType(userDetailsActions.userLoading),
-      exhaustMap(({ id }) => {
-        return userDetailsRepository.getUserDetails(id).pipe(
+      concatMap(({ userId }) => {
+        return userDetailsRepository.getUserDetails(userId).pipe(
           map((user) => userDetailsActions.userLoadedSuccess({ user })),
           catchError(() =>
             of(
@@ -36,8 +36,8 @@ export const loadUserTodos = createEffect(
   ) => {
     return actions$.pipe(
       ofType(userDetailsActions.todosLoading),
-      exhaustMap(({ id }) =>
-        userDetailsRepository.getUserTodos(id).pipe(
+      concatMap(({ userId }) =>
+        userDetailsRepository.getUserTodos(userId).pipe(
           map((todos) => userDetailsActions.todosLoadedSuccess({ todos })),
           catchError(() =>
             of(
@@ -93,6 +93,31 @@ export const editTodo = createEffect(
               userDetailsActions.editTodoFailure({
                 todoActionErrorMessage:
                   'Failed to edit todo. Please try again.',
+              })
+            )
+          )
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const deleteTodo = createEffect(
+  (
+    actions$ = inject(Actions),
+    userDetailsRepository = inject(UserDetailsRepository)
+  ) => {
+    return actions$.pipe(
+      ofType(userDetailsActions.deleteTodo),
+      exhaustMap(({ todoId }) => {
+        return userDetailsRepository.deleteTodo(todoId).pipe(
+          map(() => userDetailsActions.deleteTodoSuccess()),
+          catchError(() =>
+            of(
+              userDetailsActions.editTodoFailure({
+                todoActionErrorMessage:
+                  'Failed to delete todo. Please try again.',
               })
             )
           )

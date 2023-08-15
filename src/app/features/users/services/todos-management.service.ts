@@ -35,7 +35,7 @@ export class TodoManagementService {
       })
       .afterClosed()
       .pipe(
-        filter((results) => !!results),
+        filter((result) => !!result),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((result) => this.userDetailsFacade.addTodo(result));
@@ -66,11 +66,43 @@ export class TodoManagementService {
       })
       .afterClosed()
       .pipe(
-        filter((results) => !!results),
+        filter((result) => !!result),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((result) =>
         this.userDetailsFacade.editTodo({ ...result, id: todo.id })
       );
+  }
+
+  openDeleteTodoDialog({
+    dialog,
+    dialogRef,
+    todo,
+  }: DialogParams & { todo: Todo }): void {
+    dialog
+      .open(DialogComponent, {
+        data: {
+          templateRef: dialogRef,
+          input$: of(todo),
+          labels: {
+            title: 'Delete todo',
+            submit: 'Submit',
+            cancel: 'Cancel',
+          },
+          options: {
+            disabled: false,
+          },
+          submitColor: 'warn',
+          result: true,
+        },
+        disableClose: true,
+        width: '600px',
+      })
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.userDetailsFacade.deleteTodo(todo.id));
   }
 }

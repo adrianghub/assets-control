@@ -12,6 +12,7 @@
   <div class="buttons-group">
     <app-button
       variant="raised"
+      [color]="data.submitColor ?? 'primary'"
       [mat-dialog-close]="data.result"
       [text]="data.labels.submit"
       [disabled]="data.options.disabled"
