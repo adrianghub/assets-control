@@ -1,3 +1,4 @@
+import { TablePageAbstract } from '@/app/shared/table-page.abstract';
 import { TableColumnComponent } from '@/app/shared/ui/atoms/table-column/table-column.component';
 import { TableColumnsComponent } from '@/app/shared/ui/organisms/table/table-columns.component';
 import { TableComponent } from '@/app/shared/ui/organisms/table/table.component';
@@ -19,7 +20,7 @@ import { UserDetailsFacade } from '../../store/user-details/user-details.facade'
   selector: 'app-user-albums-tab',
   templateUrl: './user-albums.tab.html',
 })
-export class UserAlbumsTab implements OnInit {
+export class UserAlbumsTab extends TablePageAbstract implements OnInit {
   protected userDetailsFacade = inject(UserDetailsFacade);
   private parent = inject(UserDetailsPage);
 

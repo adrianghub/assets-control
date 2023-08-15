@@ -6,12 +6,12 @@ import { Observable, map } from 'rxjs';
 import { AlbumPhoto, AlbumPhotoDto } from '../../models/album-photo.model';
 
 @Injectable()
-export class AlbumsRepository {
+export class AlbumDetailsRepository {
   private http = inject(HttpClient);
 
-  getAlbums(): Observable<Album[]> {
-    return this.http.get<AlbumDto[]>(
-      `${environment.jsonPlaceholderApiUrl}/albums`
+  getAlbumDetails(albumId: number): Observable<Album> {
+    return this.http.get<AlbumDto>(
+      `${environment.jsonPlaceholderApiUrl}/albums/${albumId}`
     );
   }
 

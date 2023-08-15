@@ -16,6 +16,7 @@ const initialState: AlbumsState = {
 
 const reducer = createReducer(
   initialState,
+  // albums
   on(albumsActions.albumsLoading, (state) => ({
     ...state,
     loading: true,

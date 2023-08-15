@@ -1,0 +1,12 @@
+<ng-container *ngIf="(albumDetailsFacade.albumViewModel$ | async) as albumVm">
+  <p *ngIf="albumVm.albumErrorMessage as error; else headerTemplate">
+    {{ error }}
+  </p>
+
+  <ng-template #headerTemplate>
+    <app-layout-header
+      *ngIf="albumVm.album"
+      [subtitle]="albumVm.album.title"
+      backNavLink="/albums"
+    /> </ng-template
+></ng-container>

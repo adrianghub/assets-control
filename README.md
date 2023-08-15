@@ -8,13 +8,13 @@
   - [x] Config routing
   - [x] Config state management
 - [ ] Features
-  - [ ] Users
+  - [x] Users
     - [x] Show users data
     - [x] Add user
     - [x] Edit user data
     - [x] Show todos for selected user
     - [x] Add/edit/delete todos
-    - [ ] Show albums for selected user
+    - [x] Show albums for selected user
   - [ ] Albums
     - [x] Show albums
     - [ ] Show pictures for chosen album

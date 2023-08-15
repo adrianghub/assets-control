@@ -10,6 +10,7 @@
     [data$]="userDetailsFacade.albums$"
     [loading$]="userDetailsFacade.albumsLoading$"
     [rowHover]="true"
+    (rowSelected)="goToDetails($event, 'albums')"
   >
     <app-table-columns>
       <app-table-column matColumnDef="Title">
