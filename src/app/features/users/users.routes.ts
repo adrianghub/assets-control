@@ -13,6 +13,8 @@ import * as usersEffects from './store/users/users.effects';
 import { UsersFacade } from './store/users/users.facade';
 import { UsersRepository } from './store/users/users.repository';
 import { usersFeature } from './store/users/users.state';
+import { UserAlbumsTab } from './tabs/user-albums/user-albums.tab';
+import { UserTodosTab } from './tabs/user-todos/user-todos.tab';
 
 export const usersRoutes: Route[] = [
   {
@@ -35,6 +37,21 @@ export const usersRoutes: Route[] = [
       TodoManagementService,
       provideState(userDetailsFeature),
       provideEffects(userDetailsEffects),
+    ],
+    children: [
+      {
+        path: 'todos',
+        component: UserTodosTab,
+      },
+      {
+        path: 'albums',
+        component: UserAlbumsTab,
+      },
+      {
+        path: '**',
+        redirectTo: 'todos',
+        pathMatch: 'prefix',
+      },
     ],
   },
 ];

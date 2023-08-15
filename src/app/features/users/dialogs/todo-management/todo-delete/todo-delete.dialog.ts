@@ -1,7 +1,7 @@
 import { DialogData } from '@/app/shared/ui/organisms/dialog/dialog.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Todo } from '../../../models/todos.model';
+import { Todo } from '../../../models/todo.model';
 
 @Component({
   standalone: true,

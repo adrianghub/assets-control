@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputComponent } from '@/shared/ui/atoms/input/input.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
-import { User } from '../../models/users.model';
+import { User } from '../../models/user.model';
 import { notEmptyValidator } from '../../validators/notEmpty.validator';
 
 interface UserFormGroup {

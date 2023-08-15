@@ -3,7 +3,7 @@ import { DestroyRef, Injectable, TemplateRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, of } from 'rxjs';
-import { Todo } from '../models/todos.model';
+import { Todo } from '../models/todo.model';
 import { UserDetailsFacade } from '../store/user-details/user-details.facade';
 
 interface DialogParams {

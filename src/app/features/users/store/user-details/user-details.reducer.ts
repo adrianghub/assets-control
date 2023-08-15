@@ -1,40 +1,8 @@
-import { Album } from '@/app/shared/models/album.model';
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { Todo } from '../../models/todo.model';
-import { User } from '../../models/user.model';
+import { createReducer, on } from '@ngrx/store';
 import { userDetailsActions } from './user-details.actions';
+import { initialState } from './user-details.state';
 
-interface UserDetailsState {
-  user: User | undefined;
-  userLoading: boolean;
-  userErrorMessage: string | null;
-
-  todos: Todo[];
-  todosLoading: boolean;
-  todosErrorMessage: string | null;
-  todoActionErrorMessage: string | null;
-
-  albums: Album[];
-  albumsLoading: boolean;
-  albumsErrorMessage: string | null;
-}
-
-const initialState: UserDetailsState = {
-  user: undefined,
-  userLoading: false,
-  userErrorMessage: null,
-
-  todos: [],
-  todosLoading: false,
-  todosErrorMessage: null,
-  todoActionErrorMessage: null,
-
-  albums: [],
-  albumsLoading: false,
-  albumsErrorMessage: null,
-};
-
-const reducer = createReducer(
+export const userDetailsReducer = createReducer(
   // user details
   initialState,
   on(userDetailsActions.userLoading, (state) => ({
@@ -127,8 +95,3 @@ const reducer = createReducer(
     })
   )
 );
-
-export const userDetailsFeature = createFeature({
-  name: 'user-details',
-  reducer,
-});

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
-import { Todo } from '../../models/todos.model';
+import { Todo } from '../../models/todo.model';
 import { userDetailsActions } from './user-details.actions';
 import { userDetailsFeature } from './user-details.state';
 
@@ -16,12 +16,22 @@ export class UserDetailsFacade {
     userDetailsFeature.selectTodosErrorMessage
   );
 
+  albums$ = this.store.select(userDetailsFeature.selectAlbums);
+  albumsLoading$ = this.store.select(userDetailsFeature.selectAlbumsLoading);
+  albumsErrorMessage$ = this.store.select(
+    userDetailsFeature.selectAlbumsErrorMessage
+  );
+
   loadUserDetails(userId: number): void {
     this.store.dispatch(userDetailsActions.userLoading({ userId }));
   }
 
   loadUserTodos(userId: number): void {
     this.store.dispatch(userDetailsActions.todosLoading({ userId }));
+  }
+
+  loadUserAlbums(userId: number): void {
+    this.store.dispatch(userDetailsActions.albumsLoading({ userId }));
   }
 
   addTodo(todo: Todo): void {

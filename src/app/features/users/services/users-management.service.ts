@@ -3,7 +3,7 @@ import { DestroyRef, Injectable, TemplateRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, of } from 'rxjs';
-import { User } from '../models/users.model';
+import { User } from '../models/user.model';
 import { UsersFacade } from '../store/users/users.facade';
 
 interface DialogParams {

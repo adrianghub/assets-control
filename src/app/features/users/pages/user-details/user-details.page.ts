@@ -1,86 +1,47 @@
 import { LayoutHeaderComponent } from '@/app/core/layouts/components/layout-header/layout-header.component';
 import { ButtonComponent } from '@/app/shared/ui/atoms/button/button.component';
-import { IconButtonComponent } from '@/app/shared/ui/atoms/icon-button/icon-button.component';
-import { TableColumnComponent } from '@/app/shared/ui/atoms/table-column/table-column.component';
-import { TableColumnsComponent } from '@/app/shared/ui/organisms/table/table-columns.component';
-import { TableComponent } from '@/app/shared/ui/organisms/table/table.component';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
-import { TodoDeleteDialog } from '../../dialogs/todo-management/todo-delete/todo-delete.dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TodoManagementDialog } from '../../dialogs/todo-management/todo-management.dialog';
-import { Todo } from '../../models/todos.model';
-import { User } from '../../models/users.model';
+import { MatTabRouterLinkActiveDirective } from '../../directives/routerLinkActive.directive';
 import { TodoManagementService } from '../../services/todos-management.service';
 import { UserDetailsFacade } from '../../store/user-details/user-details.facade';
 
 @Component({
   standalone: true,
   imports: [
-    MatTableModule,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnsComponent,
     CommonModule,
-    JsonPipe,
     LayoutHeaderComponent,
     ButtonComponent,
     TodoManagementDialog,
     MatDialogModule,
-    IconButtonComponent,
-    TodoDeleteDialog,
+    RouterModule,
+    MatTabsModule,
+    MatTabRouterLinkActiveDirective,
   ],
   selector: 'app-user-details-page',
   templateUrl: './user-details.page.html',
-  styleUrls: ['./user-details.page.scss'],
 })
 export class UserDetailsPage implements OnInit {
   protected userDetailsFacade = inject(UserDetailsFacade);
   protected todosRepositoryService = inject(TodoManagementService);
-  protected route = inject(ActivatedRoute);
   protected dialog = inject(MatDialog);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
 
-  protected user!: User;
+  public userId!: number;
 
   ngOnInit() {
-    const userId = this.route.snapshot.params['id'];
+    this.userId = this.route.snapshot.params['id'];
 
-    this.userDetailsFacade.loadUserDetails(userId);
-    this.userDetailsFacade.loadUserTodos(userId);
+    this.userDetailsFacade.loadUserDetails(this.userId);
   }
 
   openAddTodoDialog(dialogRef: TemplateRef<MatDialog>) {
     this.todosRepositoryService.openAddTodoDialog({
-      dialogRef,
-      dialog: this.dialog,
-    });
-  }
-
-  openEditTodoDialog(
-    $event: MouseEvent,
-    dialogRef: TemplateRef<MatDialog>,
-    todo: Todo
-  ) {
-    $event.stopPropagation();
-
-    this.todosRepositoryService.openEditTodoDialog({
-      todo,
-      dialogRef,
-      dialog: this.dialog,
-    });
-  }
-
-  openDeleteTodoDialog(
-    $event: MouseEvent,
-    dialogRef: TemplateRef<MatDialog>,
-    todo: Todo
-  ) {
-    $event.stopPropagation();
-
-    this.todosRepositoryService.openDeleteTodoDialog({
-      todo,
       dialogRef,
       dialog: this.dialog,
     });

@@ -1,9 +1,10 @@
+import { Album, AlbumDto } from '@/app/shared/models/album.model';
 import { environment } from '@/env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo, TodoDto } from '../../models/todos.model';
-import { User, UserDto } from '../../models/users.model';
+import { Todo, TodoDto } from '../../models/todo.model';
+import { User, UserDto } from '../../models/user.model';
 
 @Injectable()
 export class UserDetailsRepository {
@@ -18,6 +19,12 @@ export class UserDetailsRepository {
   getUserTodos(userId: number): Observable<Todo[]> {
     return this.http.get<TodoDto[]>(
       `${environment.jsonPlaceholderApiUrl}/users/${userId}/todos`
+    );
+  }
+
+  getUserAlbums(userId: number): Observable<Album[]> {
+    return this.http.get<AlbumDto[]>(
+      `${environment.jsonPlaceholderApiUrl}/users/${userId}/albums`
     );
   }
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserParams } from '../../dialogs/user-management/user-management.dialog';
-import { User, UserDto } from '../../models/users.model';
+import { User, UserDto } from '../../models/user.model';
 
 @Injectable()
 export class UsersRepository {

@@ -1,8 +1,8 @@
+import { Album, AlbumDto } from '@/app/shared/models/album.model';
 import { environment } from '@/env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Album, AlbumDto } from '../../models/albums.model';
 
 @Injectable()
 export class AlbumsRepository {

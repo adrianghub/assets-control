@@ -54,6 +54,31 @@ export const loadUserTodos = createEffect(
   { functional: true }
 );
 
+export const loadUserAlbums = createEffect(
+  (
+    actions$ = inject(Actions),
+    userDetailsRepository = inject(UserDetailsRepository)
+  ) => {
+    return actions$.pipe(
+      ofType(userDetailsActions.albumsLoading),
+      concatMap(({ userId }) =>
+        userDetailsRepository.getUserAlbums(userId).pipe(
+          map((albums) => userDetailsActions.albumsLoadedSuccess({ albums })),
+          catchError(() =>
+            of(
+              userDetailsActions.albumsLoadedFailure({
+                albumsErrorMessage:
+                  'Failed to load user albums. Please refresh the browser.',
+              })
+            )
+          )
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
 export const addTodo = createEffect(
   (
     actions$ = inject(Actions),

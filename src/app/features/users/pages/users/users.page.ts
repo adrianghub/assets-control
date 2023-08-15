@@ -11,7 +11,7 @@ import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatColumnDef, MatTableModule } from '@angular/material/table';
 import { UserManagementDialog } from '../../dialogs/user-management/user-management.dialog';
-import { User } from '../../models/users.model';
+import { User } from '../../models/user.model';
 import { UserManagementService } from '../../services/users-management.service';
 import { UsersFacade } from '../../store/users/users.facade';
 

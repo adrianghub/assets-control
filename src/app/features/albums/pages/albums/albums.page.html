@@ -19,7 +19,9 @@
 
       <app-table-column matColumnDef="Owner ID">
         <ng-template let-item>
-          <a [routerLink]="'/users/' + item.userId" class="owner-link"
+          <a
+            [routerLink]="'/users/' + item.userId + '/albums'"
+            class="owner-link"
             >{{ item.userId }}
           </a>
         </ng-template>

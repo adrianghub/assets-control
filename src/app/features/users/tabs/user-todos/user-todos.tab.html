@@ -1,0 +1,51 @@
+<p
+  *ngIf="(userDetailsFacade.todosErrorMessage$ | async) as error; else tableTemplate"
+>
+  {{ error }}
+</p>
+
+<ng-template #tableTemplate>
+  <app-table
+    #table
+    [data$]="userDetailsFacade.todos$"
+    [loading$]="userDetailsFacade.todosLoading$"
+  >
+    <app-table-columns>
+      <app-table-column matColumnDef="Title">
+        <ng-template let-item> {{ item.title }} </ng-template>
+      </app-table-column>
+
+      <app-table-column matColumnDef="Completed">
+        <ng-template let-item>
+          <span class="todo-status" [ngClass]="{ 'done': item.completed }"
+            >{{ item.completed ? 'Yes' : 'No' }}</span
+          >
+        </ng-template>
+      </app-table-column>
+
+      <app-table-column matColumnDef="Actions">
+        <ng-template let-item>
+          <div class="actions">
+            <app-icon-button
+              icon="edit"
+              (click)="openEditTodoDialog($event, editTodoDialog, item)"
+            />
+
+            <app-icon-button
+              icon="delete"
+              (click)="openDeleteTodoDialog($event, deleteTodoDialog, item)"
+            />
+          </div>
+        </ng-template>
+      </app-table-column>
+    </app-table-columns>
+  </app-table>
+</ng-template>
+
+<ng-template #editTodoDialog let-data>
+  <app-todo-management-dialog [data]="data" />
+</ng-template>
+
+<ng-template #deleteTodoDialog let-data>
+  <app-todo-delete-dialog [data]="data" />
+</ng-template>

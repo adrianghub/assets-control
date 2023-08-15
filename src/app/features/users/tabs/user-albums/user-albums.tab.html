@@ -1,0 +1,20 @@
+<p
+  *ngIf="(userDetailsFacade.albumsErrorMessage$ | async) as error; else tableTemplate"
+>
+  {{ error }}
+</p>
+
+<ng-template #tableTemplate>
+  <app-table
+    #table
+    [data$]="userDetailsFacade.albums$"
+    [loading$]="userDetailsFacade.albumsLoading$"
+    [rowHover]="true"
+  >
+    <app-table-columns>
+      <app-table-column matColumnDef="Title">
+        <ng-template let-item> {{ item.title }} </ng-template>
+      </app-table-column>
+    </app-table-columns>
+  </app-table>
+</ng-template>

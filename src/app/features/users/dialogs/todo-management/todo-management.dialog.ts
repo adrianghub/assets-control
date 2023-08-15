@@ -13,7 +13,7 @@ import { SelectComponent } from '@/app/shared/ui/atoms/select/select.component';
 import { InputComponent } from '@/shared/ui/atoms/input/input.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
-import { Todo } from '../../models/todos.model';
+import { Todo } from '../../models/todo.model';
 import { notEmptyValidator } from '../../validators/notEmpty.validator';
 
 interface TodoFormGroup {

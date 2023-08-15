@@ -1,20 +1,8 @@
-import { Album } from '@/app/shared/models/album.model';
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { albumsActions } from './albums.actions';
+import { initialState } from './albums.state';
 
-interface AlbumsState {
-  albums: Album[];
-  loading: boolean;
-  errorMessage: string | null;
-}
-
-const initialState: AlbumsState = {
-  albums: [],
-  loading: false,
-  errorMessage: null,
-};
-
-const reducer = createReducer(
+export const albumsReducer = createReducer(
   initialState,
   on(albumsActions.albumsLoading, (state) => ({
     ...state,
@@ -32,8 +20,3 @@ const reducer = createReducer(
     errorMessage,
   }))
 );
-
-export const albumsFeature = createFeature({
-  name: 'albums',
-  reducer,
-});

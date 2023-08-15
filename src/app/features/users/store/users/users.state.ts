@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { User } from '../../models/users.model';
+import { User } from '../../models/user.model';
 import { usersActions } from './users.actions';
 
 interface UsersState {
