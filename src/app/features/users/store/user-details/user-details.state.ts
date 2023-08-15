@@ -72,7 +72,7 @@ const reducer = createReducer(
     todosLoading: false,
     todosErrorMessage,
   })),
-  on(userDetailsActions.addTodo, (state, { todo }) => ({
+  on(userDetailsActions.addTodoSuccess, (state, { todo }) => ({
     ...state,
     todos: [todo, ...state.todos],
   })),

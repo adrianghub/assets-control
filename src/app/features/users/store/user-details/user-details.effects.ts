@@ -88,7 +88,7 @@ export const addTodo = createEffect(
       ofType(userDetailsActions.addTodo),
       exhaustMap(({ todo }) => {
         return userDetailsRepository.postTodo(todo).pipe(
-          map(() => userDetailsActions.addTodoSuccess()),
+          map((todo) => userDetailsActions.addTodoSuccess({ todo })),
           catchError(() =>
             of(
               userDetailsActions.addTodoFailure({
@@ -136,6 +136,8 @@ export const deleteTodo = createEffect(
     return actions$.pipe(
       ofType(userDetailsActions.deleteTodo),
       exhaustMap(({ todoId }) => {
+        console.log(todoId);
+
         return userDetailsRepository.deleteTodo(todoId).pipe(
           map(() => userDetailsActions.deleteTodoSuccess()),
           catchError(() =>

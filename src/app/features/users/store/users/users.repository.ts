@@ -15,8 +15,8 @@ export class UsersRepository {
     );
   }
 
-  postUser(params: UserParams): Observable<UserParams> {
-    return this.http.post<UserParams>(
+  postUser(params: UserParams): Observable<User> {
+    return this.http.post<UserDto>(
       `${environment.jsonPlaceholderApiUrl}/users`,
       params
     );

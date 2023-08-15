@@ -33,7 +33,7 @@ const reducer = createReducer(
     loading: false,
     errorMessage,
   })),
-  on(usersActions.addUser, (state, { user }) => ({
+  on(usersActions.addUserSuccess, (state, { user }) => ({
     ...state,
     users: [user, ...state.users],
   })),

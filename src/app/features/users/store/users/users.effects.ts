@@ -49,7 +49,7 @@ export const addUser = createEffect(
       ofType(usersActions.addUser),
       exhaustMap(({ user }) => {
         return usersRepository.postUser(user).pipe(
-          map(() => usersActions.addUserSuccess()),
+          map((user) => usersActions.addUserSuccess({ user })),
           catchError(() =>
             of(
               usersActions.addUserFailure({

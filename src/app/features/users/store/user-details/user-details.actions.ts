@@ -20,7 +20,7 @@ export const userDetailsActions = createActionGroup({
 
     addTodo: props<{ todo: Todo }>(),
     addTodoFailure: props<{ todoActionErrorMessage: string }>(),
-    addTodoSuccess: emptyProps(),
+    addTodoSuccess: props<{ todo: Todo }>(),
 
     editTodo: props<{ todo: Todo }>(),
     editTodoFailure: props<{ todoActionErrorMessage: string }>(),

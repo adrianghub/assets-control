@@ -9,7 +9,7 @@ export const usersActions = createActionGroup({
     usersLoadedFailure: props<{ errorMessage: string }>(),
 
     addUser: props<{ user: User }>(),
-    addUserSuccess: emptyProps(),
+    addUserSuccess: props<{ user: User }>(),
     addUserFailure: props<{ userActionErrorMessage: string }>(),
 
     editUser: props<{ user: User }>(),
