@@ -35,7 +35,7 @@ const reducer = createReducer(
   })),
   on(usersActions.addUser, (state, { user }) => ({
     ...state,
-    users: [...state.users, user],
+    users: [user, ...state.users],
   })),
   on(usersActions.addUserFailure, (state, { userActionErrorMessage }) => ({
     ...state,

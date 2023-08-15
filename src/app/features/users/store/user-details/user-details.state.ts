@@ -74,7 +74,7 @@ const reducer = createReducer(
   })),
   on(userDetailsActions.addTodo, (state, { todo }) => ({
     ...state,
-    todos: [...state.todos, todo],
+    todos: [todo, ...state.todos],
   })),
   on(
     userDetailsActions.addTodoFailure,
