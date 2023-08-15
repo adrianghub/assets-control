@@ -1,28 +1,17 @@
-<div class="header">
-  <a class="mat-headline-3 header-title" [routerLink]="'/'">{{ title }}</a>
+<ngx-skeleton-loader
+  *ngIf="loading; else headerTemplate"
+  count="1"
+  appearance="line"
+  class="header-skeleton"
+  [theme]="{ maxWidth: '350px' }"
+/>
 
-  <nav class="nav">
-    <ul *ngFor="let link of menuLinks">
-      <li>
-        <a
-          [routerLink]="link.path"
-          routerLinkActive="active"
-          class="nav-link"
-          >{{ link.label }}</a
-        >
-      </li>
-    </ul>
-  </nav>
-</div>
-
-<mat-divider class="divider" />
-
-<div class="subheader">
+<ng-template #headerTemplate>
   <a *ngIf="backNavLink" [routerLink]="backNavLink"
     ><app-icon-button icon="keyboard_backspace"
   /></a>
 
-  <h1 class="mat-h1 header-title">{{ subtitle }}</h1>
+  <h1 class="mat-h1 header-title">{{ title }}</h1>
 
   <ng-content select="[actions]" />
-</div>
+</ng-template>

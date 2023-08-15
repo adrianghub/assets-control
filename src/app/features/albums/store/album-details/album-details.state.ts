@@ -34,7 +34,7 @@ const reducer = createReducer(
   on(albumDetailsActions.albumLoadedSuccess, (state, { album }) => ({
     ...state,
     album,
-    loading: false,
+    albumLoading: false,
   })),
   on(
     albumDetailsActions.albumLoadedFailure,

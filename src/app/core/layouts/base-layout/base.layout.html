@@ -1,0 +1,17 @@
+<div class="header">
+  <a class="mat-headline-3 header-title" [routerLink]="'/'">{{ title }}</a>
+
+  <nav class="nav">
+    <ul *ngFor="let link of menuLinks">
+      <li>
+        <a [routerLink]="link.path" routerLinkActive="active" class="nav-link"
+          >{{ link.label }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<mat-divider class="divider" />
+
+<router-outlet />

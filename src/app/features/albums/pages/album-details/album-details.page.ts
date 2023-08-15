@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatColumnDef, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AlbumPhotoCardComponent } from '../../components/album-photo-card/album-photo-card.component';
+import { AlbumPhotosSkeletonComponent } from '../../components/album-photos-skeleton/album-photos-skeleton.component';
 import { AlbumDetailsFacade } from '../../store/album-details/album-details.facade';
 
 @Component({
@@ -24,16 +27,23 @@ import { AlbumDetailsFacade } from '../../store/album-details/album-details.faca
     HttpClientModule,
     IconButtonComponent,
     RouterModule,
+    AlbumPhotoCardComponent,
+    AlbumPhotosSkeletonComponent,
+    NgxSkeletonLoaderModule,
   ],
   providers: [MatColumnDef],
   selector: 'app-album-details-page',
   templateUrl: './album-details.page.html',
+  styleUrls: ['./album-details.page.scss'],
 })
 export class AlbumDetailsPage implements OnInit {
   protected albumDetailsFacade = inject(AlbumDetailsFacade);
   protected route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this.albumDetailsFacade.loadAlbumDetails(this.route.snapshot.params['id']);
+    const albumId = this.route.snapshot.params['id'];
+
+    this.albumDetailsFacade.loadAlbumDetails(albumId);
+    this.albumDetailsFacade.loadAlbumPhotos(albumId);
   }
 }

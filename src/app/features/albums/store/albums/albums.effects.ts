@@ -24,7 +24,7 @@ export const loadAlbums = createEffect(
               of(
                 albumsActions.albumsLoadedFailure({
                   errorMessage:
-                    'Failed to load albums. Please refresh the browser.',
+                    'Failed to load albums. Please refresh the browser. If problem persists, try again later.',
                 })
               )
             )

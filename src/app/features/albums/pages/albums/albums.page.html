@@ -1,4 +1,4 @@
-<app-layout-header subtitle="Albums" />
+<app-layout-header title="Albums" />
 
 <p *ngIf="(albumsFacade.errorMessage$ | async) as error; else tableTemplate">
   {{ error }}

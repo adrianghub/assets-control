@@ -18,7 +18,32 @@ export const loadAlbums = createEffect(
             of(
               albumDetailsActions.albumLoadedFailure({
                 albumErrorMessage:
-                  'Failed to load album details. Please refresh the browser.',
+                  'Failed to load album details. Please refresh the browser. If problem persists, try again later.',
+              })
+            )
+          )
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const loadPhotos = createEffect(
+  (
+    actions$ = inject(Actions),
+    albumDetailsRepository = inject(AlbumDetailsRepository)
+  ) => {
+    return actions$.pipe(
+      ofType(albumDetailsActions.photosLoading),
+      concatMap(({ albumId }) => {
+        return albumDetailsRepository.getAlbumPhotos(albumId).pipe(
+          map((photos) => albumDetailsActions.photosLoadedSuccess({ photos })),
+          catchError(() =>
+            of(
+              albumDetailsActions.photosLoadedFailure({
+                photosErrorMessage:
+                  'Failed to load photos. Please refresh the browser. If problem persists, try again later.',
               })
             )
           )

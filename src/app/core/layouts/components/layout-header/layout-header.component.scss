@@ -1,39 +1,15 @@
-@use '@angular/material' as mat;
-@use '_color-palettes' as palettes;
-
 :host {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-right: auto;
   margin-bottom: 24px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-link.active {
-    color: mat.get-color-from-palette(palettes.$brown-palette, 500);
-    text-decoration: underline;
-  }
 }
 
 .header-title {
   margin: 0;
 }
 
-.divider {
-  margin: 16px 0 32px;
-}
-
-.subheader {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-right: auto;
+.header-skeleton {
+  width: 100%;
 }

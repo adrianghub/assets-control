@@ -1,10 +1,8 @@
 import { IconButtonComponent } from '@/app/shared/ui/atoms/icon-button/icon-button.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { menuLinks } from '../../layout.const';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   standalone: true,
@@ -13,17 +11,14 @@ import { menuLinks } from '../../layout.const';
   styleUrls: ['./layout-header.component.scss'],
   imports: [
     CommonModule,
-    MatDividerModule,
     RouterModule,
-    MatIconModule,
     IconButtonComponent,
+    NgxSkeletonLoaderModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutHeaderComponent {
-  @Input() title = 'Assets Control';
+  @Input({ required: true }) title?: string;
+  @Input() loading = false;
   @Input() backNavLink?: string;
-  @Input({ required: true }) subtitle!: string;
-
-  menuLinks = menuLinks;
 }

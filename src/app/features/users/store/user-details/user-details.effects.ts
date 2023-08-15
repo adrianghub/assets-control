@@ -18,7 +18,7 @@ export const loadUserDetails = createEffect(
             of(
               userDetailsActions.userLoadedFailure({
                 userErrorMessage:
-                  'Failed to load user details. Please refresh the browser.',
+                  'Failed to load user details. Please refresh the browser. If problem persists, try again later.',
               })
             )
           )
@@ -43,7 +43,7 @@ export const loadUserTodos = createEffect(
             of(
               userDetailsActions.todosLoadedFailure({
                 todosErrorMessage:
-                  'Failed to load user todos. Please refresh the browser.',
+                  'Failed to load user todos. Please refresh the browser. If problem persists, try again later.',
               })
             )
           )
@@ -68,7 +68,7 @@ export const loadUserAlbums = createEffect(
             of(
               userDetailsActions.albumsLoadedFailure({
                 albumsErrorMessage:
-                  'Failed to load user albums. Please refresh the browser.',
+                  'Failed to load user albums. Please refresh the browser. If problem persists, try again later.',
               })
             )
           )

@@ -5,8 +5,8 @@
 
   <ng-template #headerTemplate>
     <app-layout-header
-      *ngIf="userVm.user"
-      [subtitle]="userVm.user.name + ' (' + userVm.user.username + ')'"
+      [loading]="userVm.userLoading"
+      [title]="userVm.user?.name + ' (' + userVm.user?.username + ')'"
       backNavLink="/users"
     >
       <app-button

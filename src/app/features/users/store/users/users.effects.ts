@@ -31,7 +31,7 @@ export const loadUsers = createEffect(
               of(
                 usersActions.usersLoadedFailure({
                   errorMessage:
-                    'Failed to load users. Please refresh the browser.',
+                    'Failed to load users. Please refresh the browser. If problem persists, try again later.',
                 })
               )
             )

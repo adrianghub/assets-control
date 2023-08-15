@@ -5,8 +5,28 @@
 
   <ng-template #headerTemplate>
     <app-layout-header
-      *ngIf="albumVm.album"
-      [subtitle]="albumVm.album.title"
+      [title]="albumVm.album?.title"
+      [loading]="albumVm.albumLoading"
       backNavLink="/albums"
-    /> </ng-template
-></ng-container>
+    />
+  </ng-template>
+
+  <ng-container
+    *ngIf="(albumDetailsFacade.photosViewModel$ | async) as photosVm"
+  >
+    <p *ngIf="photosVm.photosErrorMessage as error">{{ error }}</p>
+
+    <app-album-photos-skeleton
+      *ngIf="photosVm.photosLoading; else photosTemplate"
+    />
+
+    <ng-template #photosTemplate>
+      <div class="photos-grid">
+        <app-album-photo-card
+          *ngFor="let photo of photosVm.photos"
+          [photo]="photo"
+        ></app-album-photo-card>
+      </div>
+    </ng-template>
+  </ng-container>
+</ng-container>
