@@ -7,7 +7,7 @@
   - [x] Config UI lib
   - [x] Config routing
   - [x] Config state management
-- [ ] Features
+- [x] Features
   - [x] Users
     - [x] Show users data
     - [x] Add user
@@ -15,9 +15,9 @@
     - [x] Show todos for selected user
     - [x] Add/edit/delete todos
     - [x] Show albums for selected user
-  - [ ] Albums
+  - [x] Albums
     - [x] Show albums
-    - [ ] Show pictures for chosen album
+    - [x] Show pictures for chosen album
 - [ ] Test units/e2e
   - [ ] Users
   - [ ] Albums
